@@ -37,13 +37,14 @@ def handle(client):
                else:
                     broadcast(message)
           except:
-               index=clients.index(client)
-               clients.remove(client)
-               clients.close()
-               username=usernames[index]
-               broadcast(f'{username} left the chat'.encode('ascii'))
-               usernames.remove(username)
-               break
+               if client in clients:
+                    index=clients.index(client)
+                    clients.remove(client)
+                    clients.close()
+                    username=usernames[index]
+                    broadcast(f'{username} left the chat!'.encode('ascii'))
+                    usernames.remove(username)
+                    break
 
 def kick_user(name):
      if name in usernames:
